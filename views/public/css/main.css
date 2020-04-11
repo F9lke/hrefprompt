@@ -1,0 +1,63 @@
+/*--------------------
+    Colors & Fonts
+--------------------*/
+@font-face {
+	font-family: Montserrat;
+	src: url("../media/fonts/Montserrat/Montserrat-Regular.ttf");
+}
+@font-face {
+	font-family: Raleway;
+	src: url("../media/fonts/Raleway/Raleway-Regular.ttf");
+}
+@font-face {
+	font-family: Ubuntu;
+	src: url("../media/fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
+@font-face {
+	font-family: Nunito;
+	src: url("../media/fonts/Nunito/Nunito-Regular.ttf");
+}
+@font-face {
+	font-family: OpenSans;
+	src: url("../media/fonts/Open_Sans/OpenSans-Regular.ttf");
+}
+@font-face {
+	font-family: WorkSans;
+	src: url("../media/fonts/Work_Sans/WorkSans-Regular.ttf");
+}
+
+:root{
+	--black: #202121;
+	--black-box-shadow: 0 0 20px 0 rgba(235,234,235,1);
+
+	--navbar-height: 110px;
+}
+
+/*--------------------
+        Base
+--------------------*/
+.page-hrefp *:not('.wp-editor') { margin: 0; padding: 0; box-sizing: border-box; display: block; }
+.page-hrefp { line-height: 1.8; margin: 0 auto; max-width: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: 1em; }
+.page-hrefp p { font-size: 16px; line-height: 180%; font-weight: 300; }
+
+/*--------------------
+   Global Classes
+--------------------*/
+
+.page-hrefp .dnone { display: none !important; }
+.page-hrefp .dblock { display: block !important; }
+.page-hrefp .hidden { visibility: hidden; }
+.page-hrefp .visible { visibility: visible; }
+.page-hrefp .transition { transition: 0.3s all linear; }
+.page-hrefp .tooltip { z-index: 99999999999 !important; }
+.page-hrefp .float-right { float: right; }
+.page-hrefp .float-left { float: left; }
+.page-hrefp .flex-centered{ display: flex; justify-content: center; align-items: center; }
+.page-hrefp .break_word { -ms-word-wrap: break-word; word-wrap: break-word; }
+.page-hrefp .debug{ position: relative; z-index: 99999999; border-top: 1px solid #000; }
+.page-hrefp .input-error{ border: 1px solid darkred !important; border-radius: 2px; }
+.page-hrefp .cleanBtn{ background: transparent; border: 0; cursor: pointer; outline: 0 !important; text-decoration: none; }
+
+@media (min-width: 320px) and (max-width: 450px) {
+	.page-hrefp .linebreak::before { content: "\A"; white-space: pre; }
+}

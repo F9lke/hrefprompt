@@ -1,0 +1,92 @@
+<?php
+	/**
+	 * @name: configuration
+	 * @package: views > admin
+	 * @description: Template for admin-configuration page
+	 * @author: Florian Götzrath <info@floriangoetzrath.de>
+	 */
+?>
+<?php /* @var MainController $MC An instance of the MainController passed for use in this particular template */ ?>
+
+<?php $msg_data = $MC->getAllPromptMessages(); ?>
+<?php $active_msg = $MC->getPromptMessage(); ?>
+
+<div id="admin-page" class="page-hrefp">
+	<div id="admin-page_inner" class="container">
+
+		<header id="page-title">
+			<div class="page-title_inner">
+				<p class="page-title_pre">
+					<?php echo HREFP_NAME; ?>
+				</p>
+				<h1 class="page-title_primary">
+					Konfiguration
+				</h1>
+			</div>
+		</header>
+
+		<section id="sec-edit">
+			<div class="sec-edit_inner">
+				<form method="post" action="<?php echo WP_URL.'/wp-admin/admin.php?page='.$MC->view['route'].'&amp;action=prompt_msg_submit'; ?>">
+					<label for="editor">Eigener Abfragentext</label>
+					<span class="tooltip-container d-inline-block">
+						<span class="dashicons dashicons-editor-help"></span>
+						<span id="tooltip">Mögliche Platzhalter: <br> [weiterleiten]NACHRICHT[/weiterleiten], [abbrechen]NACHRICHT[/abbrechen]</span>
+					</span>
+					<div class="wp-editor">
+						<?php $editor_settings = array("media_buttons" => false, "editor_height" => 150); ?>
+						<?php wp_editor($active_msg, "prompt_msg", $editor_settings); ?>
+					</div>
+					<input type="submit" value="Speichern">
+				</form>
+			</div>
+		</section>
+
+		<section id="sec-confstyle">
+			<div class="sec-confstyle_inner">
+				<div class="row">
+					<div class="col-md-6">
+						<h5 class="sec-heading">
+							Custom Modal Aktivieren
+							<span class="tooltip-container d-inline-block">
+								<span class="dashicons dashicons-editor-help"></span>
+								<span id="tooltip">Ein applikationseigenes Fenster einem im Browser eingebauten vorziehen</span>
+							</span>
+						</h5>
+					</div>
+					<div class="col-md-6">
+						<form method="post" action="<?php echo WP_URL.'/wp-admin/admin.php?page='.$MC->view['route'].'&amp;action=confirmation_style_update'; ?>">
+							<input
+								type="checkbox"
+								id="switch"
+								<?php if(get_option("confirmation_style") === "modal") echo "checked"; ?>
+								onclick="this.nextElementSibling.nextElementSibling.click()"
+								name="confirmation_style_modal"
+							>
+							<label for="switch">Toggle</label>
+							<input type="submit" id="confstyle-submit" style="display: none;">
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<?php if(count($msg_data) > 1) { ?>
+			<section id="sec-reuse">
+				<div class="sec-reuse_inner">
+					<h5 class="sec-heading">Eine ehemalige Nachricht wiederverwenden</h5>
+					<div class="sec-collection">
+						<?php foreach($msg_data as $msg) { ?>
+							<?php if($msg === end($msg_data)) continue; ?>
+
+							<a href="<?php echo WP_URL.'/wp-admin/admin.php?page='.$MC->view['route'].'&amp;action=reuse_prompt_msg&amp;prompt_msg_id='.$msg[Message::TABLE_PREFIX.'id']; ?>">
+								<?php echo $msg[Message::TABLE_PREFIX.'content']; ?>
+							</a>
+						<?php } ?>
+					</div>
+				</div>
+			</section>
+		<?php } ?>
+
+	</div>
+</div> <!-- #admin-page -->

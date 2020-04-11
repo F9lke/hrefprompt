@@ -1,0 +1,68 @@
+/*--------------------
+  Confirmation Modal
+--------------------*/
+#conf-modal-window {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 9999999;
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.25s all ease;
+}
+#conf-modal-window.modal-opened { visibility: visible; opacity: 1; pointer-events: auto;
+}
+#conf-modal-window > div {
+	width: 400px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	padding: 36px;
+	background: #ffffff;
+}
+#conf-modal-window .modal-bot.bot-hidden{ display: none; }
+#conf-modal-window header { font-weight: bold; }
+#conf-modal-window h1 { font-size: 27px !important; margin: 0 0 15px !important; font-family: "WorkSans", sans-serif; color: #000; }
+#conf-modal-window .msg { font-size: 18px !important; line-height: 27px !important; margin: 0 0 15px !important; }
+#conf-modal-window .msg ~ div { margin-bottom: 15px; }
+#conf-modal-window small,
+#conf-modal-window .modal-close {
+	color: #aaa;
+	font-size: 14px;
+	font-family: "Raleway", sans-serif;
+	text-decoration: none;
+	font-weight: 600;
+	cursor: pointer;
+}
+#conf-modal-window .modal-close-top {
+	position: absolute;
+	right: 3%;
+	text-align: center;
+	top: 0;
+	width: 70px;
+	line-height: 50px;
+	cursor: pointer;
+}
+#conf-modal-window a.modal-close-bot,
+#conf-modal-window a.modal-close-text,
+#conf-modal-window a.modal-redirect-text,
+#conf-modal-window a.modal-redirect {
+	display: inline;
+	color: rgba(0, 0, 0, .85);
+	font-size: 16px;
+	cursor: pointer;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 600;
+}
+#conf-modal-window a.modal-close-text,
+#conf-modal-window a.modal-redirect-text { text-decoration: underline; }
+#conf-modal-window a.modal-close-bot { padding-left: 0; }
+#conf-modal-window a.modal-close-bot:hover,
+#conf-modal-window a.modal-redirect:hover { text-decoration: underline; }
+#conf-modal-window .modal-close:hover { color: black; }
