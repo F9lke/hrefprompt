@@ -1,12 +1,5 @@
 <?php
  
-	/**
-	 * Format Date to DB-Ready Date
-	 *
-	 * @param $date
-	 *
-	 * @return false|string
-	 */
 	function hrefp_dateToDBDate($date)
 	{
 

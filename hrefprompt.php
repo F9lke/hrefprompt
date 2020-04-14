@@ -23,6 +23,7 @@
 
 	define('HREFP_CONTROLLER_PATH', HREFP_ROOT_PATH.'/controller');
 	define('HREFP_LIBRARY_PATH', HREFP_ROOT_PATH.'/lib');
+	define('HREFP_LOG_PATH', HREFP_ROOT_PATH.'/logs');
 	define('HREFP_MODEL_PATH', HREFP_ROOT_PATH.'/model');
 	define('HREFP_VIEWS_PATH', HREFP_ROOT_PATH.'/views');
 	define('HREFP_PUBLIC_PATH', HREFP_VIEWS_PATH.'/public');
@@ -49,9 +50,9 @@
 
 	// Instantiate Global Classes
 
-	$GLOBALS['hrefp_err'] = new ErrorHandler();
-	$GLOBALS['hrefp_db'] = new db();
-	$GLOBALS['hrefp_mc'] = new MainController();
+	$GLOBALS['hrefp_err'] = new hrefp_ErrorHandler();
+	$GLOBALS['hrefp_db'] = new hrefp_db();
+	$GLOBALS['hrefp_mc'] = new hrefp_MainController();
 
 	// Queue Functions
 

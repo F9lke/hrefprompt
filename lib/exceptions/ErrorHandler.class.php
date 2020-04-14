@@ -7,16 +7,18 @@
 	 * @author: Florian Götzrath <info@floriangoetzrath.de>
 	 */
 
-	// TODO: Write error history to log file on fatal error but keep it limited by certain filesize thresholds
-
-	class ErrorHandler
+	class hrefp_ErrorHandler
 	{
+
+		/** @var integer messages_threshold field to store the numeric maximum of concurrent message saves */
+		const ERR_LOG_FILENAME = "errors.json";
+		const ERR_LOG_FILE_SIZE_THRESHOLD_MB = 10;
 
 		/** @var array the capturing of any thrown errors */
 		private $err_history;
 
 		/**
-		 * ErrorHandler constructor
+		 * hrefp_ErrorHandler constructor
 		 */
 		function __construct()
 		{
@@ -60,6 +62,34 @@
 		} // protected function queueErrToHistory()
 
 		/**
+		 * Updates the log file with the latest errors thrown
+		 * 
+		 * @note: If the log file size surpasses a threshold, it will be cleared and only the latest error will be written to it
+		 */
+		protected function writeErrorsToLog()
+		{
+
+			// Define the log path
+			$logFilePath = HREFP_LOG_PATH . '/' . static::ERR_LOG_FILENAME;
+
+			// Determine, whether the file only fits the latest errors sizewise
+			$clearFile = false;
+
+			if(file_exists($logFilePath)) 
+				$clearFile = number_format(filesize($logFilePath) / 1048576, 2) > static::ERR_LOG_FILE_SIZE_THRESHOLD_MB;	
+
+			// Clear the file in case of it being too large
+			if($clearFile) file_put_contents($logFilePath, json_encode(array()));
+
+			// Write to the log file
+			file_put_contents($logFilePath, json_encode($this->err_history, JSON_PRETTY_PRINT));
+
+			// Clear the errors stored in this instance
+			$this->err_history = array();
+
+		} // protected function writeErrorsToLog()
+
+		/**
 		 * Adds an error that will cause the current interaction to die
 		 *
 		 * @param String         $customErrMsg
@@ -73,6 +103,9 @@
 			// Save the error to the history
 			$this->queueErrToHistory($customErrMsg, $exception);
 
+			// Update the log file
+			$this->writeErrorsToLog();
+
 			// Throw the exception
 			if(!($exception instanceof Exception)) $exception = new Exception();
 
@@ -81,4 +114,4 @@
 
 		} // public function throwFatalError()
 
-	} // class ErrorHandler
+	} // class hrefp_ErrorHandler

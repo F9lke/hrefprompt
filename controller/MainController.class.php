@@ -9,7 +9,7 @@
 
 	require_once(realpath(__DIR__).'/../hrefprompt.php');
 
-	class MainController
+	class hrefp_MainController
 	{
 
 		/* @var $isAdmin boolean field to store whether the request originates from an administrative interface */
@@ -25,7 +25,7 @@
 		public $view;
 
 		/**
-		 * MainController constructor
+		 * hrefp_MainController constructor
 		 */
 		function __construct()
 		{
@@ -77,7 +77,7 @@
 		{
 
 			// Register the plugin menu entry
-			add_menu_page( HREFP_NAME, "Linkabfrage", "edit_posts", "hrefp-admin", "MainController::dispatch", null);
+			add_menu_page( HREFP_NAME, "Linkabfrage", "edit_posts", "hrefp-admin", "hrefp_MainController::dispatch", null);
 
 		} // public function admin_menu()
 
@@ -124,7 +124,7 @@
 		public static function dispatch()
 		{
 
-			$MC = new MainController();
+			$MC = new hrefp_MainController();
 			$_REQUEST['page'] = strtolower(sanitize_text_field($_REQUEST['page']));
 
 			// Cancel if the request did not originate from the WordPres backend
@@ -468,4 +468,4 @@
 
 		} // public static function replacePromptMessageTemplating()
 
-	} // class MainController
+	} // class hrefp_MainController

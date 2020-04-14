@@ -7,7 +7,7 @@
 	 * @author: Florian Götzrath <info@floriangoetzrath.de>
 	 */
 
-	final class db
+	final class hrefp_db
 	{
 
 		/** @var String the formatted host string that is used to build the connection  */
@@ -16,7 +16,7 @@
 		private $pdo;
 
 		/**
-		 * db constructor
+		 * hrefp_db constructor
 		 */
 		function __construct()
 		{
@@ -256,4 +256,4 @@
 
 		} // public function applyQuotesToIdentifier()
 
-	} // final class db
+	} // final class hrefp_db
