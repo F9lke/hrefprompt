@@ -125,7 +125,7 @@
 		{
 
 			$MC = new MainController();
-			$_REQUEST['page'] = strtolower(xssproof($_REQUEST['page']));
+			$_REQUEST['page'] = strtolower(sanitize_text_field($_REQUEST['page']));
 
 			// Cancel if the request did not originate from the WordPres backend
 			if(!$MC->isAdmin) return false;
@@ -160,7 +160,7 @@
 					break;
 
 				case "reuse_prompt_msg":
-					$MC->reusePromptMessage(xssproof($_REQUEST['prompt_msg_id']));
+					$MC->reusePromptMessage(sanitize_key($_REQUEST['prompt_msg_id']));
 					break;
 
 			}

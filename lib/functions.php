@@ -1,17 +1,4 @@
 <?php
-
-	function xssproof($val)
-	{
-
-		if(is_array($val))
-			foreach($val as $k => $v)
-				$val[$k] = xssproof($v);
-		else
-			$val = strip_tags(@trim($val));
-
-		return $val;
-
-	} // function xssproof($val)
  
 	/**
 	 * Format Date to DB-Ready Date
