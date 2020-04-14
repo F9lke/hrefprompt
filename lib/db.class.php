@@ -103,7 +103,7 @@
 			foreach($updateMapping as $updateCol => $updateVal)
 			{
 
-				if(is_int($updateCol) && !isSizedString($updateCol)) continue;
+				if(is_int($updateCol) && !hrefp_isSizedString($updateCol)) continue;
 
 				$setDirectives[] = $this->applyQuotesToIdentifier($updateCol) . ' = ?';
 				$bindValues[] = $updateVal;

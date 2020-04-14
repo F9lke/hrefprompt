@@ -27,7 +27,7 @@
 
 		<section id="sec-edit">
 			<div class="sec-edit_inner">
-				<form method="post" action="<?php echo WP_URL.'/wp-admin/admin.php?page='.$MC->view['route'].'&amp;action=prompt_msg_submit'; ?>">
+				<form method="post" action="<?php echo HREFP_WP_URL.'/wp-admin/admin.php?page='.$MC->view['route'].'&amp;action=prompt_msg_submit'; ?>">
 					<label for="editor">Eigener Abfragentext</label>
 					<span class="tooltip-container d-inline-block">
 						<span class="dashicons dashicons-editor-help"></span>
@@ -59,7 +59,7 @@
 							<input
 								type="checkbox"
 								id="switch"
-								<?php if(get_option("confirmation_style") === "modal") echo "checked"; ?>
+								<?php if(get_option("hrefp_confirmation_style") === "modal") echo "checked"; ?>
 								onclick="this.nextElementSibling.nextElementSibling.click()"
 								name="confirmation_style_modal"
 							>
@@ -79,7 +79,7 @@
 						<?php foreach($msg_data as $msg) { ?>
 							<?php if($msg === end($msg_data)) continue; ?>
 
-							<a href="<?php echo WP_URL.'/wp-admin/admin.php?page='.$MC->view['route'].'&amp;action=reuse_prompt_msg&amp;prompt_msg_id='.$msg[Message::TABLE_PREFIX.'id']; ?>">
+							<a href="<?php echo HREFP_WP_URL.'/wp-admin/admin.php?page='.$MC->view['route'].'&amp;action=reuse_prompt_msg&amp;prompt_msg_id='.$msg[Message::TABLE_PREFIX.'id']; ?>">
 								<?php echo $msg[Message::TABLE_PREFIX.'content']; ?>
 							</a>
 						<?php } ?>

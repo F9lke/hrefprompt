@@ -59,7 +59,7 @@
 				// Pass essential values to the scripts
 				wp_localize_script("prompter_script", "prompter", array(
 					"msg" => static::replacePromptMessageTemplating($this->getPromptMessage()),
-					"confstyle" => get_option("confirmation_style")
+					"confstyle" => get_option("hrefp_confirmation_style")
 				));
 
 			}
@@ -90,24 +90,24 @@
 		{
 
 			// Check if the resources have already been added
-			if(isset_true($GLOBALS['resources_added'])) return false;
+			if(hrefp_isset_true($GLOBALS['resources_added'])) return false;
 
 			// Load resources independent of the request's origin regarding frontend or backend
-			wp_enqueue_style("hrefp_mainstyle", PUBLIC_URL.'/css/main.css');
-			wp_enqueue_style("hrefp_bootratp_css", LIBRARY_URL.'/ui/bootstrap/css/bootstrap.min.css');
+			wp_enqueue_style("hrefp_mainstyle", HREFP_PUBLIC_URL.'/css/main.css');
+			wp_enqueue_style("hrefp_bootratp_css", HREFP_LIBRARY_URL.'/ui/bootstrap/css/bootstrap.min.css');
 
 			// Load resources based on wether the current request is coming from the backend or the frontend
 			if($this->isAdmin)
 			{
 
-				wp_enqueue_style('hrefp_adminstyle', PUBLIC_URL.'/css/admin.css');
+				wp_enqueue_style('hrefp_adminstyle', HREFP_PUBLIC_URL.'/css/admin.css');
 
 			}
 			else
 			{
 
-				wp_enqueue_script("prompter_script", PUBLIC_URL.'/js/prompter.transpiled.js');
-				wp_enqueue_style('hrefp_frontendstyle', PUBLIC_URL.'/css/frontend.css');
+				wp_enqueue_script("prompter_script", HREFP_PUBLIC_URL.'/js/prompter.transpiled.js');
+				wp_enqueue_style('hrefp_frontendstyle', HREFP_PUBLIC_URL.'/css/frontend.css');
 
 			}
 
@@ -136,13 +136,13 @@
 
 				case "hrefp-admin":
 					$MC->view['route'] = "hrefp-admin";
-					$MC->renderTemplate(VIEWS_PATH.'/admin/configuration.phtml');
+					$MC->renderTemplate(HREFP_VIEWS_PATH.'/admin/configuration.phtml');
 					break;
 
 				default:
 				case "hrefp-404":
 					$MC->view['route'] = "hrefp-404";
-					$MC->renderTemplate(VIEWS_PATH.'/admin/404.phtml');
+					$MC->renderTemplate(HREFP_VIEWS_PATH.'/admin/404.phtml');
 					break;
 
 			}
@@ -174,16 +174,16 @@
 		{
 
 			// Get all model files
-			$availableModels = array_diff(scandir(MODEL_PATH), array(".", ".."));
+			$availableModels = array_diff(scandir(HREFP_MODEL_PATH), array(".", ".."));
 
 			// Iterate over each model file, require it and instantiate the class structure
 			foreach($availableModels as $model_file)
 			{
-				if(!is_dir(MODEL_PATH."/".$model_file) && preg_match("/(.*)\.class\.php/i", $model_file))
+				if(!is_dir(HREFP_MODEL_PATH."/".$model_file) && preg_match("/(.*)\.class\.php/i", $model_file))
 				{
 
 					// Include and instantiate the model
-					require_once(MODEL_PATH."/".$model_file);
+					require_once(HREFP_MODEL_PATH."/".$model_file);
 
 					$className = str_replace(".class.php", "", $model_file);
 					$this->models[strtolower($className)] = (new $className());
@@ -221,7 +221,7 @@
 			$MC = $this;
 
 			// If specified variables were passed to be accesible in the template, store them
-			if(isSizedArray($templateParams)) $MC->view['template'] = $templateParams;
+			if(hrefp_isSizedArray($templateParams)) $MC->view['template'] = $templateParams;
 
 			// Eventually render the file
 			include $filePath;
@@ -246,7 +246,7 @@
 			if($areHeadersSent && $forceRedirect) echo "<script>window.location.replace('".$url."');</script>";
 
 			// Finally change the location the standard way
-			if(isSizedString($url))
+			if(hrefp_isSizedString($url))
 			{
 
 				unset($this->db);
@@ -390,7 +390,7 @@
 		{
 
 			// Save the setting
-			update_option("confirmation_style", ($modalStyleEnabled ? "modal" : "confirmation"));
+			update_option("hrefp_confirmation_style", ($modalStyleEnabled ? "modal" : "confirmation"));
 
 			// Refresh to clear the url parameters and display the changes
 			$this->redirect("?page=hrefp-admin", true);
@@ -411,7 +411,7 @@
 			$requested_msg = $this->getPromptMessageDataByID($oldMsgID);
 
 			// If the requested message is not to be found, cancel
-			if(!isSizedArray($requested_msg)) return false;
+			if(!hrefp_isSizedArray($requested_msg)) return false;
 
 			// If the requested message it the last one saved and thus is already active, cancel
 			if(end($this->models['message']->data['all_messages']) === $requested_msg) return false;

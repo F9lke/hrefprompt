@@ -43,7 +43,7 @@
 
 				$GLOBALS['hrefp_db']->exec("
 					INSERT INTO `".static::TABLE_NAME."` (`".static::TABLE_PREFIX."id`, `".static::TABLE_PREFIX."content`, `".static::TABLE_PREFIX."created_at`) VALUES
-					(1, 'Die von Ihnen besuchte Seite versucht, Sie an eine andere Seite weiterzuleiten. <br> Falls Sie diese Seite nicht besuchen möchten, können Sie hier [abbrechen]abbrechen[/abbrechen].<br>Mit [weiterleiten]weiterleiten[/weiterleiten] verlassen Sie die Seite und werden weitergeleitet.', '".dateToDBDate(time())."')
+					(1, 'Die von Ihnen besuchte Seite versucht, Sie an eine andere Seite weiterzuleiten. <br> Falls Sie diese Seite nicht besuchen möchten, können Sie hier [abbrechen]abbrechen[/abbrechen].<br>Mit [weiterleiten]weiterleiten[/weiterleiten] verlassen Sie die Seite und werden weitergeleitet.', '".hrefp_dateToDBDate(time())."')
 				");
 
 			}
@@ -56,11 +56,11 @@
 		public function loadAll()
 		{
 
-			if(isSizedArray($this->data['all_messages'])) return false;
+			if(hrefp_isSizedArray($this->data['all_messages'])) return false;
 
 			$res = $GLOBALS['hrefp_db']->select("SELECT * FROM " . static::TABLE_NAME);
 
-			$this->data['all_messages'] = isSizedArray($res) ? $res : array();
+			$this->data['all_messages'] = hrefp_isSizedArray($res) ? $res : array();
 
 		} // public function loadAll()
 
@@ -70,7 +70,7 @@
 		public function loadLatestMessage()
 		{
 
-			if(!isSizedArray($this->data['all_messages'])) $this->loadAll();
+			if(!hrefp_isSizedArray($this->data['all_messages'])) $this->loadAll();
 
 			$this->data['latest_message'] = count($this->data['all_messages']) > 0
 				? end($this->data['all_messages'])
@@ -107,7 +107,7 @@
 		public function getNumberOfSavedMessages()
 		{
 
-			if(!isSizedArray($this->data['all_messages'])) $this->loadAll();
+			if(!hrefp_isSizedArray($this->data['all_messages'])) $this->loadAll();
 
 			return count($this->data['all_messages']);
 
