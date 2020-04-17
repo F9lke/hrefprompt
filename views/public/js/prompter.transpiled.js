@@ -78,7 +78,7 @@ var distributeLinkPrompter = function distributeLinkPrompter() {
 			if (confstyle === "confirmation") {
 				
 				// Show the confirmation box
-				var confirmationRes = window.confirm(msg);
+				var confirmationRes = window.confirm(msg.content);
 				
 				// If the user declines the redirect, cancel the action
 				if (!confirmationRes) e.preventDefault();
@@ -118,7 +118,7 @@ var injectModalTemplate = function injectModalTemplate() {
 		'    <a title="' + msg.close + '" class="modal-close modal-close-top">' + msg.close + '</a>\n' +
 		"    <h1>" + msg.title + "</h1>\n" +
 		'    <div class="msg">' +
-		msg +
+		msg.content +
 		"</div>\n" +
 		"    <div class='modal-bot'><small>" + msg.actions + "</small></div>\n" +
 		'    <a class="btn button modal-close modal-close-bot modal-bot">' + msg.cancel + '</a>\n' +
@@ -129,7 +129,7 @@ var injectModalTemplate = function injectModalTemplate() {
 	document.querySelector("body").insertAdjacentElement("beforeend", modalEl);
 	
 	// Hide the bottom part in case custom templating of the action buttons as been configured
-	if(msg.indexOf("modal-close-text") !== -1 && msg.indexOf("modal-redirect-text") !== -1) {
+	if(msg.content.indexOf("modal-close-text") !== -1 && msg.content.indexOf("modal-redirect-text") !== -1) {
 		Array.from(document.querySelectorAll(".modal-bot")).forEach(function(el) {
 			el.classList.add("bot-hidden");
 		})

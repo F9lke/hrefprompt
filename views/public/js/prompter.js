@@ -47,7 +47,7 @@ const distributeLinkPrompter = () => {
 			if(confstyle === "confirmation") {
 				
 				// Show the confirmation box
-				let confirmationRes = window.confirm(msg);
+				let confirmationRes = window.confirm(msg.content);
 				
 				// If the user declines the redirect, cancel the action
 				if(!confirmationRes) e.preventDefault();
@@ -94,7 +94,7 @@ const injectModalTemplate = () => {
 	document.querySelector("body").insertAdjacentElement('beforeend', modalEl);
 	
 	// Hide the bottom part in case custom templating of the action buttons as been configured
-	if(msg.indexOf("modal-close-text") !== -1 && msg.indexOf("modal-redirect-text") !== -1) {
+	if(msg.content.indexOf("modal-close-text") !== -1 && msg.content.indexOf("modal-redirect-text") !== -1) {
 		document.querySelectorAll(".modal-bot").forEach(el => {
 			el.classList.add("bot-hidden");
 		})
