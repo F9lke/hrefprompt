@@ -5,7 +5,7 @@
  * @author: Florian Götzrath <info@floriangoetzrath.de>
  */
 
-/** @var {String} msg constant to store the configured prompt message */
+/** @var {String} msg constant to store the prompt messages */
 var _prompter = prompter,
 	msg = _prompter.msg;
 
@@ -115,14 +115,14 @@ var injectModalTemplate = function injectModalTemplate() {
 	modalEl.classList.add("modal-window");
 	modalEl.innerHTML =
 		"  <div>\n" +
-		'    <a title="Schließen" class="modal-close modal-close-top">Schließen</a>\n' +
-		"    <h1>Weiterleitungshinweis</h1>\n" +
+		'    <a title="' + msg.close + '" class="modal-close modal-close-top">' + msg.close + '</a>\n' +
+		"    <h1>" + msg.title + "</h1>\n" +
 		'    <div class="msg">' +
 		msg +
 		"</div>\n" +
-		"    <div class='modal-bot'><small>Aktionen</small></div>\n" +
-		'    <a class="btn button modal-close modal-close-bot modal-bot">Abbrechen</a>\n' +
-		'    <a class="btn button modal-redirect modal-redirect-bot modal-bot">Weiterleiten</a>\n' +
+		"    <div class='modal-bot'><small>" + msg.actions + "</small></div>\n" +
+		'    <a class="btn button modal-close modal-close-bot modal-bot">' + msg.cancel + '</a>\n' +
+		'    <a class="btn button modal-redirect modal-redirect-bot modal-bot">' + msg.redirect + '</a>\n' +
 		"  </div>";
 	
 	// Inject it to the dom

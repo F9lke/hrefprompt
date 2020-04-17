@@ -5,7 +5,7 @@
 		Text Domain: hrefp
 		Description: Adds an additional layer of configurable confirmation to external site redirection.
 		Author: Florian Goetzrath <info@floriangoetzrath.de>
-		Version: 1.0.0
+		Version: 1.0.1
 		Author URI: https://floriangoetzrath.de/
 	*/
 

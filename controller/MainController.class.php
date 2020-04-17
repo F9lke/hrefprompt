@@ -58,7 +58,14 @@
 
 				// Pass essential values to the scripts
 				wp_localize_script("prompter_script", "prompter", array(
-					"msg" => static::replacePromptMessageTemplating($this->getPromptMessage()),
+					"msg" => array(
+						"title" => __("Weiterleitungshinweis", "hrefp"),
+						"content" => static::replacePromptMessageTemplating($this->getPromptMessage()),
+						"actions" => __("Aktionen", "hrefp"),
+						"close" => __("Schließen", "hrefp"),
+						"cancel" => __("Abbrechen", "hrefp"),
+						"redirect" => __("Weiterleiten", "hrefp")
+					),
 					"confstyle" => get_option("hrefp_confirmation_style")
 				));
 
@@ -77,7 +84,7 @@
 		{
 
 			// Register the plugin menu entry
-			add_menu_page( HREFP_NAME, "Linkabfrage", "edit_posts", "hrefp-admin", "hrefp_MainController::dispatch", null);
+			add_menu_page( HREFP_NAME, __("Linkabfrage", "hrefp"), "edit_posts", "hrefp-admin", "hrefp_MainController::dispatch", null);
 
 		} // public function admin_menu()
 
@@ -439,8 +446,8 @@
 
 			// Define the possible placeholder values with the corresponding element and classlist
 			$placeholders = array(
-				"a.modal-redirect.modal-redirect-text" => "[weiterleiten]",
-				"a.modal-close.modal-close-text" => "[abbrechen]"
+				"a.modal-redirect.modal-redirect-text" => __("[weiterleiten]", "hrefp"),
+				"a.modal-close.modal-close-text" => __("[abbrechen]", "hrefp")
 			);
 
 			// Loop through the placeholder values, match them and replace the part of the string accordingly

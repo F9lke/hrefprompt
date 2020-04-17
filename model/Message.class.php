@@ -30,6 +30,8 @@
 			if(!(bool)($GLOBALS['hrefp_db']->exec('SHOW TABLES like "'.static::TABLE_NAME.'";')))
 			{
 
+				$default_msg = __("Die von Ihnen besuchte Seite versucht, Sie an eine andere Seite weiterzuleiten. <br> Falls Sie diese Seite nicht besuchen möchten, können Sie hier [abbrechen]abbrechen[/abbrechen].<br>Mit [weiterleiten]weiterleiten[/weiterleiten] verlassen Sie die Seite und werden weitergeleitet.", "hrefp");
+
 				$GLOBALS['hrefp_db']->exec("
 					CREATE TABLE `".static::TABLE_NAME."` (
                         `".static::TABLE_PREFIX."id` int(10) NOT NULL,
@@ -43,7 +45,7 @@
 
 				$GLOBALS['hrefp_db']->exec("
 					INSERT INTO `".static::TABLE_NAME."` (`".static::TABLE_PREFIX."id`, `".static::TABLE_PREFIX."content`, `".static::TABLE_PREFIX."created_at`) VALUES
-					(1, 'Die von Ihnen besuchte Seite versucht, Sie an eine andere Seite weiterzuleiten. <br> Falls Sie diese Seite nicht besuchen möchten, können Sie hier [abbrechen]abbrechen[/abbrechen].<br>Mit [weiterleiten]weiterleiten[/weiterleiten] verlassen Sie die Seite und werden weitergeleitet.', '".hrefp_dateToDBDate(time())."')
+					(1, '".$default_msg."', '".hrefp_dateToDBDate(time())."')
 				");
 
 			}
