@@ -60,7 +60,9 @@
 				wp_localize_script("prompter_script", "prompter", array(
 					"msg" => array(
 						"title" => __("Weiterleitungshinweis", "hrefp"),
-						"content" => static::replacePromptMessageTemplating($this->getPromptMessage()),
+						"content" => static::replacePromptMessageTemplating(
+							$this->getPromptMessage(get_option("hrefp_confirmation_style") === "confirmation")
+						),
 						"actions" => __("Aktionen", "hrefp"),
 						"close" => __("Schließen", "hrefp"),
 						"cancel" => __("Abbrechen", "hrefp"),
@@ -267,18 +269,22 @@
 		/**
 		 * Gets the active prompt message
 		 *
+		 * @param bool $tagsStripped	Determines, whether potentially existing html tags should be stripped
+		 * 
 		 * @return string
 		 */
-		public function getPromptMessage(): String
+		public function getPromptMessage(bool $tagsStripped = false): String
 		{
 
 			// Load the latest message from the database
 			$this->models['message']->loadLatestMessage();
 
 			// Return the message or a default one
-			return html_entity_decode(
+			$msg = html_entity_decode(
 				$this->models['message']->data['latest_message'][Message::TABLE_PREFIX.'content']
 			);
+
+			return $tagsStripped ? hrefp_format_sentences(hrefp_strip_tags($msg)) : $msg;
 
 		} // public function getPromptMessage()
 

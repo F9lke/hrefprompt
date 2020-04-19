@@ -80,3 +80,26 @@
 		return true;
 
 	} // function hrefp_isSizedString($val)
+
+	function hrefp_strip_tags(String $msg)
+	{
+
+		$msg = strip_tags($msg);
+		$msg = preg_replace('/\[[^\]]*\]/', '', $msg);
+
+		return $msg;
+
+	} // function hrefp_strip_tags()
+
+	function hrefp_format_sentences(String $msg)
+	{
+
+		// Place whitespace after each period ignoring decimals or letter abbreviations
+		$msg = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $msg);
+
+		// Replace multiple whitespaces with a single one
+		$msg = preg_replace('!\s+!', ' ', $msg);
+
+		return $msg;
+
+	} // function hrefp_format_sentences()
