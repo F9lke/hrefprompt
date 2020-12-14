@@ -52,7 +52,8 @@
 #conf-modal-window a.modal-close-bot,
 #conf-modal-window a.modal-close-text,
 #conf-modal-window a.modal-redirect-text,
-#conf-modal-window a.modal-redirect {
+#conf-modal-window a.modal-redirect,
+#conf-modal-window .msg a[href] {
 	display: inline;
 	color: rgba(0, 0, 0, .85);
 	font-size: 16px;
@@ -61,7 +62,8 @@
 	font-weight: 600;
 }
 #conf-modal-window a.modal-close-text,
-#conf-modal-window a.modal-redirect-text { text-decoration: underline; }
+#conf-modal-window a.modal-redirect-text,
+#conf-modal-window .msg a[href] { text-decoration: underline; }
 #conf-modal-window a.modal-close-bot { padding-left: 0; }
 #conf-modal-window a.modal-close-bot:hover,
 #conf-modal-window a.modal-redirect:hover { text-decoration: underline; }
