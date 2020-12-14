@@ -61,8 +61,11 @@ const distributeLinkPrompter = () => {
 				modalEl.classList.add('modal-opened');
 				
 				// Refresh the redirect-event with the new hyper-reference
-				modalEl.querySelector(".modal-redirect").onclick = () => window.location.href = e.target.getAttribute("href");
-				
+				modalEl.querySelector(".modal-redirect").onclick = () => { 
+					window.location.href = e.target.getAttribute("href") != null 
+						? e.target.getAttribute("href") 
+						: e.target.closest("a").getAttribute("href");
+				}
 			}
 		}
 	});
@@ -89,6 +92,14 @@ const injectModalTemplate = () => {
 							'    <a class="btn button modal-close modal-close-bot modal-bot">' + msg.cancel + '</a>\n' +
 							'    <a class="btn button modal-redirect modal-redirect-bot modal-bot">' + msg.redirect + '</a>\n' +
 							'  </div>';
+
+	// Strip reference mutating characters left
+	modalEl.querySelectorAll("a[href]").forEach(function(a) {
+		modalEl.innerHTML = modalEl.innerHTML.replace(
+			a.outerHTML, 
+			a.outerHTML.replace("\\&quot;", "").replace("\\&quot;", "")
+		);
+	});
 	
 	// Inject it to the dom
 	document.querySelector("body").insertAdjacentElement('beforeend', modalEl);

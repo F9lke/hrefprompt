@@ -5,7 +5,7 @@
 		Text Domain: hrefp
 		Description: Adds an additional layer of configurable confirmation to external site redirection.
 		Author: Florian Goetzrath <info@floriangoetzrath.de>
-		Version: 1.0.2
+		Version: 1.0.4
 		Author URI: https://floriangoetzrath.de/
 	*/
 
@@ -16,7 +16,7 @@
 	// Define Core Constants
 
 	define("HREFP_NAME", "Hyper-Reference-Prompt");
-	define("HREFP_VERSION", "1.0.2");
+	define("HREFP_VERSION", "1.0.4");
 
 	define('HREFP_ROOT_PATH', dirname(__FILE__));
 	define('HREFP_URL', plugins_url().'/'.plugin_basename(__DIR__));

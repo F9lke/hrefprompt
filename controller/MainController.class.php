@@ -371,7 +371,7 @@
 
 			}
 
-			if($isAlreadyPresent) return $this->redirect("?page=hrefp-admin", true);;
+			if($isAlreadyPresent) return $this->redirect("?page=hrefp-admin", true);
 
 			// Save the new message to the database
 			$this->models['message']->addMessage($msg);

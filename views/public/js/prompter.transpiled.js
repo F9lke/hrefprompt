@@ -93,7 +93,11 @@ var distributeLinkPrompter = function distributeLinkPrompter() {
 				
 				// Refresh the redirect-event with the new hyper-reference
 				modalEl.querySelector(".modal-redirect").onclick = function() {
-					return (window.location.href = e.target.getAttribute("href"));
+					return (
+						window.location.href = e.target.getAttribute("href") != null 
+							? e.target.getAttribute("href") 
+							: e.target.closest("a").getAttribute("href")
+					);
 				};
 				
 			}
@@ -124,11 +128,19 @@ var injectModalTemplate = function injectModalTemplate() {
 		'    <a class="btn button modal-close modal-close-bot modal-bot">' + msg.cancel + '</a>\n' +
 		'    <a class="btn button modal-redirect modal-redirect-bot modal-bot">' + msg.redirect + '</a>\n' +
 		"  </div>";
+
+	// Strip reference mutating characters left
+	modalEl.querySelectorAll("a[href]").forEach(function(a) {
+		modalEl.innerHTML = modalEl.innerHTML.replace(
+			a.outerHTML, 
+			a.outerHTML.replace("\\&quot;", "").replace("\\&quot;", "")
+		);
+	});
 	
 	// Inject it to the dom
 	document.querySelector("body").insertAdjacentElement("beforeend", modalEl);
 	
-	// Hide the bottom part in case custom templating of the action buttons as been configured
+	// Hide the bottom part in case custom templating of the action buttons has been configured
 	if(msg.content.indexOf("modal-close-text") !== -1 && msg.content.indexOf("modal-redirect-text") !== -1) {
 		Array.from(document.querySelectorAll(".modal-bot")).forEach(function(el) {
 			el.classList.add("bot-hidden");
