@@ -177,5 +177,6 @@ window.onload = function() {
 
 // On anchor add due to lazy-loading or ajax based dom manipulations
 document.addEventListener("DOMNodeInserted", function(e) {
-	if (e.target.tagName.toLowerCase() === "a") distributeLinkPrompter();
+	if(!!e.target.tagName)
+		if (e.target.tagName.toLowerCase() === "a") distributeLinkPrompter();
 });

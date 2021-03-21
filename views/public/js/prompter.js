@@ -134,5 +134,6 @@ window.onload = () => {
 
 // On anchor add due to lazy-loading or ajax based dom manipulations
 document.addEventListener("DOMNodeInserted", e => {
-	if(e.target.tagName.toLowerCase() === "a") distributeLinkPrompter();
+	if(!!e.target.tagName)
+		if(e.target.tagName.toLowerCase() === "a") distributeLinkPrompter();
 });
