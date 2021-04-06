@@ -1,7 +1,7 @@
 === HrefPrompt ===
 Contributors: floriangoetzrath
 Tags: privacy,dsgvo,http-redirect,redirect,redirect-intermediate,prompter,confirmation
-Tested up to: 5.4
+Tested up to: 5.7
 Requires PHP: 7.0.0
 Stable tag: trunk
 License: MIT
