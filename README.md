@@ -1,4 +1,4 @@
-<div style="text-align: center"><h1>HrefPrompter</h1></div>
+<div style="text-align: center"><h1>HrefPrompt</h1></div>
 
 <p style="text-align: center">Adds a configurable layer of confirmation to the redirection to external websites.</p>
 
