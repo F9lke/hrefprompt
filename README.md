@@ -13,4 +13,4 @@ This ensures that your users will have total control over when to stay on your p
 ### Features
 * Compliant with the latest regulations regarding data privacy
 * Lightweight, configurable and unobtrusive
-* Tested for WordPress versions up to 5.7
+* Tested for WordPress versions up to 6.3
